@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Erythrai Antik Kenti</title>
+    
+    <!-- Google Fonts: Cinzel for headings, Lora for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    
+    <!-- Styles and Scripts -->
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body class="light-mode">
+    <!-- Welcome Screen Overlay -->
+    <div id="welcome-overlay" class="splash-container">
+        <!-- Top Header Bar -->
+        <header class="top-header">
+            <button class="header-icon" aria-label="Menu">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <img src="logo_white.png" alt="Erythrai Logo" class="logo-img">
+            <button class="header-icon" aria-label="Notifications">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Bottom Floating Card -->
+        <div class="floating-card">
+            <h1 class="card-title">MACERAYA BAŞLA</h1>
+            <div class="divider">
+                <div class="line"></div>
+                <div class="square"></div>
+                <div class="line"></div>
+            </div>
+            <p class="card-text">
+                Tabelalarda bulunan QR kodu<br>okutarak keşfe başla!
+            </p>
+            <button id="enter-app-btn" class="cta-button" style="width: 100%; border: none; font-family: 'Inter', sans-serif;">
+                QR KOD OKUT
+                <span class="btn-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="6" height="6" rx="1"></rect>
+                        <rect x="15" y="3" width="6" height="6" rx="1"></rect>
+                        <rect x="3" y="15" width="6" height="6" rx="1"></rect>
+                        <path d="M15 15h2v2h-2z"></path>
+                        <path d="M19 19h2v2h-2z"></path>
+                        <path d="M19 15h2v2h-2z"></path>
+                        <path d="M15 19h2v2h-2z"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <main>
+        <header class="app-header">
+            <div class="logo-container">
+                <img src="logo_black.png" class="logo" alt="Erythrai Logo">
+            </div>
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="search-input" placeholder="Keşfetmeye başla..." readonly disabled>
+            </div>
+        </header>
+
+        <!-- Dynamic 6-step Journey Line Timeline -->
+        <div id="journey-timeline"></div>
+
+        <div class="section-title-container">
+            <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <h2>ÖNE ÇIKAN NOKTALAR</h2>
+        </div>
+
+        <!-- Container for dynamically injected section cards -->
+        <div id="sections-container">
+            <!-- Sections will be rendered here by app.js -->
+        </div>
+    </main>
+
+    <!-- Bottom Navigation App Bar -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active" id="nav-explore">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            <span>Keşif</span>
+        </a>
+        <a href="#" class="nav-item" id="nav-map">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Harita</span>
+        </a>
+    </nav>
+
+    <!-- Standalone Route Map Page -->
+    <div id="standalone-map-page" class="hidden">
+        <div class="map-header-redesigned">
+            <h2 class="map-main-title" style="font-family: var(--font-heading); color: #5a4b41; font-size: 1.1rem; margin: 0 0 10px 0; letter-spacing: 2px;">ROTA HARİTASI</h2>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                <span style="display: flex; align-items: center; justify-content: center;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#a4432a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px;"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                </span>
+                <h3 style="margin: 5px 0; font-family: var(--font-heading); font-size: 1.5rem; color: #3d3b38; letter-spacing: 1px;">GENEL BAKIŞ</h3>
+            </div>
+            <span class="map-subtitle" style="color: #a4432a; font-weight: bold; font-size: 12px; letter-spacing: 1px;">Keşfedecek çok yer var!</span>
+        </div>
+        
+        <div class="map-frame-premium">
+            <div class="map-relative-wrapper">
+                <img src="map.png" alt="Clean Route Map" class="map-image">
+            </div>
+        </div>
+
+        <button id="standalone-back-btn" class="primary-action-btn"><span class="back-icon">←</span> GERİ DÖN</button>
+    </div>
+
+    <!-- Global Location Detail Modal -->
+    <div id="location-modal" class="location-modal">
+        <div class="modal-hero-container" id="modal-hero-bg">
+            <button id="modal-back-btn" class="modal-floating-btn modal-back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#a4432a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button id="modal-bookmark-btn" class="modal-floating-btn modal-bookmark-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#a4432a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="modal-title-group">
+                <div class="modal-title-header">
+                    <span id="modal-title-icon" class="modal-title-icon"></span>
+                    <h1 id="modal-title">CENNETTEPE</h1>
+                </div>
+                <h3 id="modal-subtitle">Erythrai Antik Kenti</h3>
+            </div>
+            
+            <p id="modal-desc" class="modal-description">Açıklama yükleniyor...</p>
+            
+            <div class="modal-stats-box">
+                <div class="stat-row">
+                    <span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+                    <span class="stat-label">Dönem</span>
+                    <span class="stat-val" id="modal-stat-era">Helenistik</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+                    <span class="stat-label">Öne Çıkan</span>
+                    <span class="stat-val" id="modal-stat-highlight">Manzara, Ritüel</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                    <span class="stat-label">Konum</span>
+                    <span class="stat-val" id="modal-stat-location">Akropol Tepesi</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 3 21 3 12 21 3 3"/></svg></span>
+                    <span class="stat-label">Keşif Rotası</span>
+                    <span class="stat-val" id="modal-stat-route">Başlangıç</span>
+                </div>
+            </div>
+            
+            <button id="prophecy-trigger-btn" class="modal-cta-btn prophecy-btn hidden">
+                <span>✧ SİBYL'İN KEHANETİNİ AL</span>
+            </button>
+        </div>
+        
+        <div class="modal-footer">
+            <button id="modal-cta-btn" class="modal-cta-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                <span>ROTA ÜZERİNDE GÖR</span>
+            </button>
+        </div>
+        <!-- Mobile Breathing Room Spacer -->
+        <div style="height: 40px; min-height: 40px; flex-shrink: 0; width: 100%;"></div>
+    </div>
+
+    <!-- Map Modal -->
+    <div id="map-modal" class="modal hidden">
+        <div class="map-header-redesigned">
+            <h2 class="map-main-title" style="font-family: var(--font-heading); color: #5a4b41; font-size: 1.1rem; margin: 0 0 10px 0; letter-spacing: 2px;">ROTA HARİTASI</h2>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                <span id="map-title-icon" style="display: flex; align-items: center; justify-content: center;"></span>
+                <h3 id="map-current-title" style="margin: 5px 0; font-family: var(--font-heading); font-size: 1.5rem; color: #3d3b38; letter-spacing: 1px;">CENNETTEPE</h3>
+            </div>
+            <span class="map-subtitle" style="color: #a4432a; font-weight: bold; font-size: 12px; letter-spacing: 1px;">Şu anda buradasınız</span>
+        </div>
+        
+        <div class="map-frame-premium">
+            <div class="map-relative-wrapper">
+                <img src="map.png" alt="Route Map" class="map-image" id="route-map-img">
+                <div id="blinking-pin"></div>
+            </div>
+        </div>
+
+        <div id="congrats-message" style="display: none; text-align: center; margin: 10px 0; color: #a4432a; font-family: serif; font-weight: bold; letter-spacing: 1px;">🎉 TEBRİKLER, ZİRVEYE ULAŞTINIZ!</div>
+
+        <button id="map-large-back-btn" class="primary-action-btn"><span class="back-icon">←</span> GERİ DÖN</button>
+    </div>
+    <!-- Prophecy Reward Screen -->
+    <div id="prophecy-screen" class="hidden">
+        <div class="prophecy-hero"></div>
+        <div class="prophecy-content">
+            <h3 class="prophecy-subtitle">ERYTHRAI'NİN ZİRVESİNE</h3>
+            <h2 class="prophecy-title">HOŞGELDİNİZ</h2>
+            <div class="prophecy-divider">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#a4432a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/><circle cx="12" cy="12" r="4"/></svg>
+            </div>
+            <p class="prophecy-intro">
+                Erythrai Akropolü, İonia'nın en güçlü kentlerinden biri olan Erythrai'nin en yüksek noktasında yer alır. Buradan kent, liman ve çevresindeki eşsiz coğrafya görülür.
+                <br><br>
+                Ticaret, kültür ve inanç merkezi olan Erythrai, binlerce yıl öncesinden günümüze uzanan köklü bir mirasa sahiptir.
+                <br><br>
+                Geçmişin izlerini keşfetmeye, Erythrai'nin zirvesinden başlayın.
+            </p>
+            
+            <div class="prophecy-card">
+                <div class="prophecy-card-header">
+                    <svg class="sparkles-icon" viewBox="0 0 24 24" fill="none" stroke="#a4432a" stroke-width="1.5"><path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg>
+                    <h3>SİBYL'İN KEHANETİ</h3>
+                </div>
+                <div class="prophecy-card-body">
+                    <img src="melek.png" alt="Prophecy Angel" class="prophecy-angel-icon">
+                    <div class="prophecy-card-text">
+                        <p id="prophecy-text-display">"..."</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="prophecy-back-btn" class="modal-cta-btn prophecy-back-btn">
+                <span>GERİ DÖN ➔</span>
+            </button>
+            <div class="prophecy-columns-bottom"></div>
+        </div>
+    </div>
+</body>
+</html>

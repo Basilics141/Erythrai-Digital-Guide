@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erythrai - Mistik Hikayeler & Arkeolojik Bulgular</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-bg: #f4eee1;
+            --color-terracotta: #a9442a;
+            --color-terracotta-dark: #8c331d;
+            --color-charcoal: #2d2d2d;
+            --color-sepia: #4a4235;
+            --color-gold: #b89742;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Lora', serif;
+            --font-meta: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            background-image: 
+                radial-gradient(rgba(169, 68, 42, 0.015) 1px, transparent 0),
+                radial-gradient(rgba(169, 68, 42, 0.015) 1px, transparent 0);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            color: var(--color-charcoal);
+            font-family: var(--font-body);
+            line-height: 1.8;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            max-width: 960px;
+            height: 150px;
+            margin-bottom: 3.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-radius: 12px;
+            border: 1px solid rgba(169, 68, 42, 0.15);
+            background-image: url('hero_theater.jpg') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            box-shadow: 0 8px 24px rgba(140, 50, 29, 0.05);
+            overflow: hidden;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo-link:hover {
+            transform: scale(1.025);
+        }
+
+        .logo {
+            height: 65px; /* Scaled up proportionally for crisp mobile readability */
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Default state for parchment sub-pages: show black logo, hide white logo */
+        .logo-white {
+            display: none !important;
+        }
+
+        .logo-black {
+            display: block !important;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-family: var(--font-meta);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-terracotta);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(169, 68, 42, 0.25);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .back-btn:hover {
+            color: var(--color-terracotta-dark);
+            transform: translateX(-4px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            color: var(--color-terracotta);
+            font-size: 2.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .subtitle {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--color-sepia);
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        main {
+            width: 100%;
+            max-width: 960px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Premium Basalt/Terracotta Dark Panel */
+        .contrast-panel {
+            background-color: #2e2a26; /* Deep dark basalt stone / burned terracotta */
+            background-image: 
+                radial-gradient(rgba(140, 50, 30, 0.12) 1px, transparent 0),
+                radial-gradient(rgba(140, 50, 30, 0.12) 1px, transparent 0);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            border: 2px solid #8c331d;
+            border-radius: 16px;
+            padding: 3.5rem 2.5rem;
+            width: 100%;
+            box-shadow: 0 25px 65px rgba(46, 42, 38, 0.35);
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+        }
+
+        /* Editorial Lore Card inside Contrast Panel */
+        .editorial-card {
+            background-color: #fcfaf2; /* Warm parchment card for high contrast */
+            border: 1px solid rgba(140, 50, 30, 0.2);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            position: relative;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .editorial-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+            border-color: rgba(140, 50, 30, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            border-bottom: 1px solid rgba(140, 50, 30, 0.15);
+            padding-bottom: 1.2rem;
+        }
+
+        .card-number {
+            font-family: var(--font-meta);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #8c331d; /* Deep Burnt Sienna */
+            letter-spacing: 2px;
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: #8c331d; /* Deep Burnt Sienna */
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .card-subtitle {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            color: var(--color-sepia);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            opacity: 0.85;
+        }
+
+        /* Layout Grid: Narrative, Visual, and Sidebar (3 columns) */
+        .card-body {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr 1fr;
+            gap: 2rem;
+            align-items: stretch; /* Match heights dynamically */
+        }
+
+        @media (max-width: 992px) {
+            .card-body {
+                grid-template-columns: 1.2fr 1fr;
+                gap: 1.5rem;
+                align-items: start;
+            }
+            .visual-container {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card-body {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                align-items: start;
+            }
+            .visual-container {
+                grid-column: span 1;
+            }
+        }
+
+        /* Premium Editorial Visual Container with Copper Framing */
+        .visual-container {
+            width: 100%;
+            background-color: #ffffff;
+            border: 3px solid #b87333; /* Antique copper frame */
+            border-radius: 8px;
+            padding: 0.8rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .visual-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(169, 68, 42, 0.08);
+        }
+
+        .fragment-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            display: block;
+            opacity: 0.95;
+            object-fit: cover; /* Strech to fill matching grid height */
+            filter: sepia(0.08) contrast(1.01);
+        }
+
+        .narrative {
+            font-size: 1.05rem;
+            color: #2d2d2d; /* Rich Charcoal Black body text */
+            line-height: 1.9;
+            text-align: justify;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .recovered-phrase {
+            margin-top: 1.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid #8c331d; /* Deep Burnt Sienna */
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #8c331d;
+            font-weight: 500;
+        }
+
+        /* Technical Sidebar styled as premium Artifact Tag */
+        .technical-sidebar {
+            background-color: rgba(140, 50, 30, 0.03);
+            border: 1px solid rgba(140, 50, 30, 0.2);
+            border-radius: 8px;
+            padding: 1.2rem;
+            font-family: var(--font-meta);
+            font-size: 0.8rem;
+            color: #2d2d2d; /* Charcoal text */
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .sidebar-title {
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            color: #8c331d; /* Burnt Sienna */
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #8c331d; /* Crisp header line */
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.2rem;
+            font-weight: 700;
+        }
+
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(140, 50, 30, 0.1); /* Crisp grid lines */
+            padding-bottom: 0.4rem;
+        }
+
+        .meta-label {
+            font-weight: 700;
+            color: rgba(74, 66, 53, 0.85);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .meta-val {
+            color: #2d2d2d;
+            font-weight: 500;
+            text-align: right;
+        }
+
+        /* Acrostic rendering styling */
+        .acrostic-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-top: 0.3rem;
+        }
+
+        .acrostic-item {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2d2d2d;
+            border-bottom: 1px dashed rgba(140, 50, 30, 0.1); /* Crisp dashed separators */
+            padding-bottom: 0.2rem;
+        }
+
+        .acrostic-highlight {
+            color: #8c331d; /* Deep Terracotta */
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        footer {
+            margin-top: 5rem;
+            margin-bottom: 2rem;
+            font-family: var(--font-heading);
+            font-size: 0.7rem;
+            color: var(--color-sepia);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            text-align: center;
+        }
+
+        /* --- Mobile Responsive Overrides --- */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem 0.5rem; /* Minimize page outer margins */
+            }
+
+            header {
+                margin-bottom: 2rem;
+                padding-bottom: 1.2rem;
+            }
+
+            h1 {
+                font-size: 1.4rem; /* Downscale main header dynamically */
+                letter-spacing: 1.5px;
+            }
+
+            .subtitle {
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+            }
+
+            .contrast-panel {
+                padding: 1.2rem 0.8rem; /* Minimize container outer margins on mobile */
+                width: 95vw; /* Expand central container width to 95vw */
+                gap: 2rem;
+                border-radius: 12px;
+            }
+
+            .editorial-card {
+                padding: 1.2rem; /* Comfortable internal card padding */
+                gap: 1.2rem;
+            }
+
+            .card-title {
+                font-size: 1.15rem; /* Downscale header to fit elegantly */
+                letter-spacing: 1px;
+            }
+
+            .card-subtitle {
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+            }
+
+            .card-body {
+                grid-template-columns: 1fr !important; /* Stack vertically on mobile */
+                gap: 1.2rem;
+            }
+
+            .visual-container {
+                padding: 0.5rem; /* Reduce photo mount padding on mobile */
+            }
+
+            .fragment-img {
+                height: 180px; /* Reduce visual height dynamically on tiny screens */
+                object-fit: cover;
+            }
+
+            .narrative {
+                font-size: 0.95rem;
+                line-height: 1.7;
+                text-align: left; /* Clean left alignment for zero massive gaps */
+            }
+
+            .technical-sidebar {
+                padding: 1rem;
+                gap: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <header>
+        <a href="index.html" class="back-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Geri Dön
+        </a>
+        <div class="logo-container">
+            <img src="logo_black.png" class="logo logo-black" alt="Erythrai Logo">
+        </div>
+    </header>
+
+    <main>
+        <!-- Dynamic Contrast Panel containing the catalog structures -->
+        <div class="contrast-panel">
+            
+            <!-- CARD 03 -->
+            <article class="editorial-card">
+                <div class="card-header">
+                    <span class="card-number">FRAGMENT 03</span>
+                    <h2 class="card-title">DENİZDEN ÇIKAN TAŞ FRAGMENT</h2>
+                    <h3 class="card-subtitle">SU, KAYBOLANI GERİ GETİRİR.</h3>
+                </div>
+                
+                <div class="card-body">
+                    <!-- Left: Antique Copper Framed Image Mount -->
+                    <div class="visual-container">
+                        <img src="fragment03.jpg" alt="Denizden Çıkan Taş Fragment" class="fragment-img">
+                    </div>
+
+                    <!-- Center: Narrative Column -->
+                    <div class="narrative">
+                        <p>Erythrai'nin kuzey kıyılarında dalgaların yüzyıllarca aşındırdığı bu kutsal kireçtaşı parçası, rüzgar tanrılarının denizle birleştiği ritüel alanından günümüze ulaşmıştır.</p>
+                        <p class="recovered-phrase">"Suyun altı, söylenmemiş sözlerle dolu."</p>
+                    </div>
+                    
+                    <!-- Right: Technical Sidebar (Premium Artifact Tag) -->
+                    <div class="technical-sidebar">
+                        <h4 class="sidebar-title">Teknik Veriler</h4>
+                        <div class="meta-item">
+                            <span class="meta-label">Kod:</span>
+                            <span class="meta-val">SIGNAL_12</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Konum:</span>
+                            <span class="meta-val">Northern Coast of Erythrai</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Materyal:</span>
+                            <span class="meta-val">Limestone / Salt / Time</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Derinlik:</span>
+                            <span class="meta-val">1.2 m</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- CARD 04 -->
+            <article class="editorial-card">
+                <div class="card-header">
+                    <span class="card-number">FRAGMENT 04</span>
+                    <h2 class="card-title">YAPRAKLARA DÖNÜŞEN HARFLER</h2>
+                    <h3 class="card-subtitle">SÖZ DOĞAYA KARIŞIYOR.</h3>
+                </div>
+                
+                <div class="card-body">
+                    <!-- Left: Antique Copper Framed Image Mount -->
+                    <div class="visual-container">
+                        <img src="fragment04.jpg" alt="Yapraklara Dönüşen Harfler" class="fragment-img">
+                    </div>
+
+                    <!-- Center: Narrative Column -->
+                    <div class="narrative">
+                        <p>Kahin Sibyl'in geleceğin sırlarını rüzgarda uçuşan zeytin yapraklarına fısıldadığı ritüelin yazılı kanıtı. Yaprakların üzerindeki damarlar, antik çağın en güçlü akrostiş kodlarını barındırıyor.</p>
+                        <p class="recovered-phrase">"Söz, doğaya karıştığında hatırlanır."</p>
+                    </div>
+                    
+                    <!-- Right: Technical Acrostic Sidebar (Premium Artifact Tag) -->
+                    <div class="technical-sidebar">
+                        <h4 class="sidebar-title">Akrostiş Fragment</h4>
+                        <ul class="acrostic-list">
+                            <li class="acrostic-item"><span class="acrostic-highlight">S</span>es</li>
+                            <li class="acrostic-item"><span class="acrostic-highlight">I</span>şık</li>
+                            <li class="acrostic-item"><span class="acrostic-highlight">B</span>akış</li>
+                            <li class="acrostic-item"><span class="acrostic-highlight">Y</span>ankı</li>
+                            <li class="acrostic-item"><span class="acrostic-highlight">L</span>itos</li>
+                            <li class="acrostic-item"><span class="acrostic-highlight">E</span>cho</li>
+                        </ul>
+                        <div class="meta-item" style="margin-top: 0.5rem; border-top: 1px solid rgba(140, 50, 30, 0.15); padding-top: 0.5rem;">
+                            <span class="meta-label">Botanical:</span>
+                            <span class="meta-val" style="font-size: 0.72rem; font-style: italic;">Olea europaea</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+        </div>
+    </main>
+
+    <footer>
+        — ERYTHRAI ARKEOLOJİ ENSTİTÜSÜ &copy; 2026 —
+    </footer>
+</body>
+</html>

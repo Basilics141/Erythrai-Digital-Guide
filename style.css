@@ -1,0 +1,1527 @@
+/* --- 2.1. CSS Custom Properties --- */
+:root {
+    --color-erythros-red: #a4432a;      /* Terracotta/Rust red primary accent */
+    --color-olive-green: #9CB29A;       /* Muted silver-olive green */
+    --color-stone-gray-light: rgba(169, 68, 42, 0.12); /* Warm light border tint */
+    --color-stone-gray-dark: #3d3b38;   /* Soft charcoal readability */
+    --color-sand: #f8f5f0;              /* Soft parchment/beige background */
+    --color-card-bg: rgba(255, 255, 255, 0.9); /* Rich light glassmorphic card base */
+    
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Lora', serif;
+}
+
+/* Section ID-specific theme colors for the mystical hover glow effect */
+#section-1 { --card-theme-color: rgba(79, 109, 122, 0.35); }  /* Slate Blue Glow */
+#section-2 { --card-theme-color: rgba(179, 74, 65, 0.35); }   /* Erythros Red Glow */
+#section-3 { --card-theme-color: rgba(155, 130, 42, 0.35); }  /* Bronze Gold Glow */
+#section-4 { --card-theme-color: rgba(118, 138, 117, 0.35); } /* Olive Green Glow */
+#section-5 { --card-theme-color: rgba(106, 91, 123, 0.35); }  /* Mystic Purple Glow */
+
+/* --- 2.2. Global Reset, Background & Typography --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: #f8f5f0; /* Soft parchment/beige */
+    background-image: 
+        radial-gradient(rgba(169, 68, 42, 0.015) 1px, transparent 0),
+        radial-gradient(rgba(169, 68, 42, 0.015) 1px, transparent 0);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+    color: #3d3b38; /* Charcoal for body text */
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+    color: #a9442a; /* Dark terracotta accent color */
+    letter-spacing: 1px;
+}
+
+/* --- 2.3. Main Container Layout --- */
+main {
+    max-width: 480px; /* Mobile-first container constraints */
+    margin: 0 auto;
+    padding: 0 0 6rem 0; /* Removed top and side padding for full-bleed header */
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.app-header {
+    text-align: center;
+    width: 100%;
+    height: 250px; /* Increased height for full-bleed hero */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-radius: 0; /* Remove radius */
+    border: none; /* Remove border */
+    background-image: url('hero_theater.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-color: transparent !important;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+/* Theme-Dynamic Logo Branding Styling */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-top: 75px; /* Shifted downward for vertical center */
+    position: relative;
+    z-index: 2;
+}
+
+.logo-link {
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-link:hover {
+    transform: scale(1.025);
+}
+
+.logo {
+    height: 60px; /* Scaled perfectly */
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Search Bar Styles */
+.search-container {
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 25px; /* Rest near bottom edge of hero */
+    background: #fff;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    color: #888;
+    margin-right: 12px;
+}
+
+.search-input {
+    border: none;
+    background: none;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: #333;
+    width: 100%;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #888;
+}
+
+/* Section Title Container */
+.section-title-container {
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    margin: 1.5rem 0 0.5rem 0;
+}
+
+.section-title-container h2 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: #3d3b38;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.section-title-container .title-icon {
+    color: #a4432a;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    margin-top: -3px;
+}
+
+#sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1.5rem; /* Container bounds */
+}
+
+/* --- 2.4. Card base styling (Premium Mobile UI) --- */
+.section-card {
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    overflow: hidden;
+    height: 240px; /* Fixed height full-bleed image card */
+    cursor: pointer;
+}
+
+.section-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    transition: transform 0.5s ease;
+}
+
+.section-card.unlocked:hover .section-card-bg {
+    transform: scale(1.05);
+}
+
+.card-gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    z-index: 2;
+}
+
+.card-info-group {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 4.5rem; /* Space for the action button */
+    z-index: 3;
+}
+
+.card-info-group h2 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    margin: 0 0 0.2rem 0;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+}
+
+.card-info-group p {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-action-btn {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #a4432a;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 3;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+}
+
+.section-card.unlocked:hover .card-action-btn {
+    transform: scale(1.1);
+}
+
+/* --- 2.5. Locked State Styling --- */
+.section-card.locked {
+    opacity: 0.6;
+    pointer-events: none;
+    user-select: none;
+    filter: grayscale(80%);
+}
+
+.section-card.locked::after {
+    content: "🔒 KİLİTLİ";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 4;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+}
+
+/* --- 2.6. Unlocked State --- */
+.section-card.unlocked {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- 2.7. Elegant Image Placeholders --- */
+.card-image-placeholder {
+    height: 180px;
+    width: 100%;
+    background-color: rgba(140, 50, 29, 0.03);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(164, 67, 42, 0.1);
+}
+
+/* Smooth radial mask overlay */
+.card-image-placeholder::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, transparent 20%, rgba(244, 238, 225, 0.35) 90%);
+    pointer-events: none;
+}
+
+/* Centered stylized text inside placeholder */
+.card-image-placeholder span {
+    font-family: var(--font-heading) !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase;
+    color: #FFFFFF !important;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+/* --- 2.8. Responsive Video Container & Button --- */
+.video-container {
+    width: 100%;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(140, 50, 29, 0.15);
+    box-shadow: 0 8px 24px rgba(140, 50, 29, 0.05);
+}
+
+.video-container video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Mystic Prophecy Button */
+.mystic-btn {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 1.8rem auto 0 auto;
+    padding: 0.9rem 1.8rem;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f4eee1;
+    background-color: #a9442a;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 15px rgba(140, 50, 29, 0.15), 0 0 10px rgba(169, 68, 42, 0.2);
+    transition: all 0.3s ease;
+    text-align: center;
+    animation: mysticalPulse 2s infinite alternate ease-in-out;
+}
+
+@keyframes mysticalPulse {
+    from {
+        box-shadow: 0 4px 15px rgba(140, 50, 29, 0.15), 0 0 8px rgba(169, 68, 42, 0.2);
+    }
+    to {
+        box-shadow: 0 4px 15px rgba(140, 50, 29, 0.15), 0 0 20px rgba(169, 68, 42, 0.45);
+    }
+}
+
+.mystic-btn:hover {
+    background-color: #c05238;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(169, 68, 42, 0.25);
+}
+
+.mystic-btn:active {
+    transform: translateY(0);
+}
+
+.mystic-btn.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.mystic-btn.fade-in {
+    display: block;
+    animation: buttonFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes buttonFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- 2.9. Prophecy Modal --- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 42, 38, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.modal.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal-content {
+    background-color: #fcfaf2; /* Warm premium light-beige/parchment background */
+    border: 2px dashed #4a4235; /* Tactile elegant dashed/handcrafted border */
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    width: 95%;
+    max-width: 440px;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15), inset 0 0 24px rgba(74, 66, 53, 0.04);
+    text-align: center;
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #2d2d2d; /* High-contrast elegant dark text */
+}
+
+.modal:not(.hidden) .modal-content {
+    transform: scale(1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #7a7364;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #a9442a;
+}
+
+.audio-player-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 2px solid #2d2d2d;
+    background-color: #fcfaf2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem auto 1.8rem auto;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 6px 16px rgba(45, 45, 45, 0.05);
+    color: #2d2d2d;
+    outline: none;
+}
+
+.audio-player-circle:hover {
+    transform: scale(1.06);
+    background-color: #2d2d2d;
+    color: #fcfaf2;
+    box-shadow: 0 8px 24px rgba(45, 45, 45, 0.15);
+}
+
+.audio-player-circle svg {
+    width: 26px;
+    height: 26px;
+    transition: all 0.2s ease;
+}
+
+.infographic-line {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(74, 66, 53, 0) 0%, rgba(74, 66, 53, 0.15) 20%, rgba(74, 66, 53, 0.15) 80%, rgba(74, 66, 53, 0) 100%);
+    width: 90%;
+    margin: 1.2rem auto;
+    position: relative;
+}
+
+.infographic-line::after {
+    content: "✦";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    color: #b89742;
+    background-color: #fcfaf2;
+    padding: 0 0.5rem;
+}
+
+.modal-title {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2d2d2d;
+    font-weight: 700;
+}
+
+.prophecy-text {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: #4a4235;
+    line-height: 1.8;
+    margin: 1.5rem 0;
+    padding: 0 1rem;
+}
+
+.prophecy-text::before,
+.prophecy-text::after {
+    content: "❖";
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: #b89742;
+    margin: 0.5rem 0;
+}
+
+/* --- 5.9. Journey Line Timeline Styling --- */
+#journey-timeline {
+    position: sticky;
+    top: 1rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(140, 50, 29, 0.35); /* Clear, thin elegant muted terracotta border */
+    border-radius: 12px;
+    padding: 1rem 0.5rem;
+    box-shadow: 0 4px 25px rgba(45, 45, 45, 0.07); /* Soft elegant drop shadow */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    overflow-x: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+#journey-timeline::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+/* Connecting Line */
+#journey-timeline::before {
+    display: none;
+}
+
+.timeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    padding: 0 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.lock-icon-box {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #a4432a;
+    border-radius: 8px;
+    margin: 5px;
+    background-color: #f4eee1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(169, 68, 42, 0.08);
+}
+
+.lock-icon-box svg {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+}
+
+.icon-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #3e2723;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-family: var(--font-heading);
+    letter-spacing: 0.8px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    margin-top: 0.2rem;
+}
+
+/* Completed State (Soft antique gold/bronze) */
+.timeline-node.completed .lock-icon-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: #a9442a;
+}
+
+.timeline-node.completed .lock-icon-box svg {
+    color: #a9442a; /* Terracotta for unlocked completed */
+}
+
+.timeline-node.completed .icon-label {
+    color: #a9442a;
+}
+
+/* Current (Active) State */
+.timeline-node.current {
+    transform: scale(1.05);
+}
+
+.timeline-node.current .lock-icon-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: #2e7559; /* Soft emerald active accent */
+    box-shadow: 0 0 16px rgba(46, 117, 89, 0.25);
+    animation: dimAuraBreathLight 3s infinite ease-in-out;
+}
+
+.timeline-node.current .lock-icon-box svg {
+    color: #2e7559;
+}
+
+.timeline-node.current .icon-label {
+    color: #2e7559;
+}
+
+/* Locked State (Kept as fallback) */
+.timeline-node.locked .lock-icon-box {
+    background-color: rgba(169, 68, 42, 0.03);
+    border-color: rgba(169, 68, 42, 0.08);
+}
+
+.timeline-node.locked .lock-icon-box svg {
+    color: rgba(169, 68, 42, 0.25);
+}
+
+.timeline-node.locked .icon-label {
+    color: rgba(169, 68, 42, 0.35);
+}
+
+@keyframes dimAuraBreathLight {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(46, 117, 89, 0.15);
+        border-color: rgba(46, 117, 89, 0.35);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(46, 117, 89, 0.35);
+        border-color: rgba(46, 117, 89, 0.6);
+    }
+}
+
+/* Style for modern minimalist SVG icons next to headings */
+.mystic-icon {
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    margin-right: 0.6rem;
+    display: inline-block;
+    color: inherit;
+    stroke-width: 1.5px;
+}
+
+/* Elegant Lore Link inside section 5 */
+.lore-link {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-style: italic;
+    color: #a9442a; /* Terracotta burnt earth tone */
+    text-decoration: none;
+    margin: 1.2rem 0;
+    transition: all 0.3s ease;
+    border-bottom: 1px dashed rgba(169, 68, 42, 0.35);
+    padding-bottom: 2px;
+}
+
+.lore-link:hover {
+    color: #8c331d;
+    border-bottom: 1px solid #8c331d;
+    transform: translateX(4px);
+}
+
+/* ==========================================
+   Phase 8: Classic Mini Prophecy Card Style
+   ========================================== */
+.mini-prophecy-card {
+    background-color: #fcf9f2; /* Creamy parchment backdrop */
+    border: 1px solid rgba(140, 51, 29, 0.45); /* Terracotta outline */
+    outline: 1px solid rgba(212, 175, 55, 0.35);
+    outline-offset: -5px;
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 6px 18px rgba(140, 51, 29, 0.08);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: miniCardReveal 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes miniCardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-12px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.mini-prophecy-card .mini-card-title {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #8c331d; /* Elegant terracotta sienna */
+    letter-spacing: 2px;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.mini-prophecy-card .mini-card-text {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #3d3b38; /* Highly readable charcoal */
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ==========================================
+   Phase 9: Bottom Navigation App Bar
+   ========================================== */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background-color: #fdfaf6;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(164, 67, 42, 0.15);
+    display: flex;
+    justify-content: space-around;
+    padding: 0.8rem 0;
+    z-index: 9999 !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #3d3b38;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.bottom-nav .nav-item.active,
+.bottom-nav .nav-item:hover {
+    opacity: 1;
+    color: #a4432a;
+}
+
+.bottom-nav .nav-item svg {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 0.2rem;
+}
+
+/* ==========================================
+   Phase 10: Location Detail Global Modal
+   ========================================== */
+.location-modal {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    background-color: #f8f5f0;
+    z-index: 2000;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.location-modal.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+.modal-hero-container {
+    width: 100%;
+    height: 45vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.modal-floating-btn {
+    position: absolute;
+    top: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(248, 245, 240, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(164, 67, 42, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.modal-floating-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.modal-back-btn {
+    left: 1.5rem;
+}
+
+.modal-bookmark-btn {
+    right: 1.5rem;
+}
+
+.modal-body {
+    background-color: #f8f5f0;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    margin-top: -30px; /* Pull up over image */
+    padding: 2rem 1.5rem 90px 1.5rem !important; /* Generous bottom padding to clear the button */
+    position: relative;
+    z-index: 2;
+    flex-grow: 1;
+}
+
+.modal-title-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.2rem;
+}
+
+.modal-title-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    color: #a4432a;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-title-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.modal-title-group h1 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: #a4432a;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.modal-title-group h3 {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: #8c887e;
+    margin: 0 0 1.5rem 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.modal-description {
+    font-family: var(--font-body);
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    color: #3d3b38;
+    margin-bottom: 2rem;
+}
+
+.modal-stats-box {
+    background: #fff;
+    border: 1px solid rgba(164, 67, 42, 0.15);
+    border-radius: 16px;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    gap: 15px;
+}
+
+.stat-row:last-child {
+    border-bottom: none;
+}
+
+.stat-icon {
+    color: #a4432a;
+    margin-right: 1rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.stat-label {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    color: #8c887e;
+    flex-grow: 1;
+}
+
+.stat-val {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: #3e2723;
+    letter-spacing: 0.3px;
+    text-align: right;
+    max-width: 55%;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.modal-footer {
+    position: sticky;
+    bottom: 20px;
+    width: 100%;
+    padding: 0 1.5rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: transparent;
+    z-index: 100;
+}
+
+.modal-cta-btn {
+    width: 100%;
+    background-color: #a4432a;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 1.2rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(164, 67, 42, 0.3);
+    cursor: pointer;
+    margin-bottom: 75px !important;
+}
+
+.modal-cta-btn svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* ==========================================
+   Phase 11: Map Modal & Blinking Pin
+   ========================================== */
+#map-modal {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    z-index: 100;
+    background: #f8f5f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 20px 40px 20px; /* Reduced top padding from 75px */
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.map-header-redesigned {
+    text-align: center;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    padding-top: 25px;
+}
+
+.map-frame-premium {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    height: 50vh;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 2px solid #a4432a;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    background-color: #e0dcd3;
+    touch-action: none;
+}
+
+.primary-action-btn {
+    position: fixed;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    max-width: 350px;
+    z-index: 9999;
+    margin: 0;
+    padding: 16px;
+    background-color: #a4432a;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(164, 67, 42, 0.25);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    touch-action: none;
+}
+
+#map-large-back-btn, #standalone-back-btn {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin: 25px auto 15px auto;
+    display: flex; /* Keep the content centered */
+}
+
+.back-icon {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.map-relative-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center;
+    display: block;
+}
+
+#blinking-pin {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: #d32f2f;
+    border: 3px solid #f8f5f0;
+    border-radius: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    animation: mapPulse 1.5s infinite;
+}
+
+@keyframes mapPulse {
+    0% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.9); }
+    70% { box-shadow: 0 0 0 25px rgba(211, 47, 47, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
+}
+
+/* ==========================================
+   Phase 13: Standalone Route Map Page
+   ========================================== */
+#standalone-map-page {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    background-color: #f8f5f0;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 20px 40px 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#standalone-map-page.hidden {
+    display: none !important;
+}
+
+.standalone-map-title {
+    font-family: 'Playfair Display', var(--font-heading), serif;
+    color: #5a4b41;
+    text-align: center;
+    margin: 0;
+    padding-top: 0;
+    letter-spacing: 2px;
+    line-height: 1.6;
+    font-size: 1.5rem;
+}
+
+.clean-map-container {
+    width: 90%;
+    max-width: 500px;
+    aspect-ratio: 1/1;
+    margin: 20px 0;
+    overflow: hidden;
+    border: 8px solid #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 0 0 1px #a4432a;
+    background-color: #e0dcd3;
+}
+
+.clean-map-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ==========================================
+   Phase 14: Prophecy Reward Feature (Phase 3)
+   ========================================== */
+
+#prophecy-trigger-btn {
+    background-color: #e9cfad;
+    color: #5d4037;
+    border: 1px solid #dcbfa6;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    width: 100%;
+    padding: 15px 0;
+    margin: 40px auto 20px auto;
+    position: relative;
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: var(--font-heading);
+}
+
+#prophecy-trigger-btn.hidden {
+    display: none !important;
+}
+
+#prophecy-trigger-btn span {
+    position: relative;
+    z-index: 2;
+    text-shadow: none;
+}
+
+#prophecy-screen {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    background-color: #f8f5f0;
+    z-index: 10001; /* Highest z-index */
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#prophecy-screen.hidden {
+    display: none !important;
+}
+
+.prophecy-hero {
+    width: 100%;
+    height: 35vh;
+    background: linear-gradient(to bottom, rgba(248, 245, 240, 0) 60%, rgba(248, 245, 240, 1) 100%), url('manzara.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.prophecy-content {
+    flex-grow: 1;
+    padding: 10px 25px 40px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #f8f5f0;
+    position: relative;
+    margin-top: -20px;
+    z-index: 2;
+}
+
+.prophecy-subtitle {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: #5a4b41;
+    letter-spacing: 2px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.prophecy-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: #a4432a;
+    letter-spacing: 1.5px;
+    margin: 5px 0 15px 0;
+}
+
+.prophecy-divider {
+    margin-bottom: 20px;
+}
+
+.prophecy-intro {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: #3d3b38;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.prophecy-card {
+    background-color: #f3ead8;
+    border: 1px solid #dcbfa6;
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.prophecy-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.prophecy-card-header svg {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.prophecy-card-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: #a4432a;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.prophecy-card-body {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.prophecy-angel-icon {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    margin-right: 15px;
+    opacity: 0.85;
+}
+
+.prophecy-card-text {
+    flex-grow: 1;
+    text-align: left;
+}
+
+#prophecy-text-display {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #3e2723;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 500;
+}
+
+.prophecy-back-btn {
+    background-color: #a4432a;
+    width: 80%;
+    margin: 0 auto;
+    font-size: 1rem;
+    padding: 1rem;
+}
+
+.prophecy-columns-bottom {
+    width: 100%;
+    height: 80px;
+    margin-top: 20px;
+    background-image: radial-gradient(rgba(169, 68, 42, 0.05) 1px, transparent 0);
+    background-size: 24px 24px;
+    opacity: 0.5;
+}
+
+/* ==========================================
+   Phase 15: Welcome Overlay
+   ========================================== */
+#welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    background-image: url('background1.jpg');
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#welcome-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#welcome-overlay .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 45px 20px 20px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+#welcome-overlay .header-icon {
+    background: none;
+    border: none;
+    color: #9a3b26;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+#welcome-overlay .header-icon:hover { opacity: 1; }
+
+#welcome-overlay .logo-img {
+    height: 60px;
+    object-fit: contain;
+}
+
+#welcome-overlay .floating-card {
+    position: absolute;
+    bottom: 6%;
+    left: 5%;
+    width: 90%;
+    background-color: #faf8f5;
+    border-radius: 20px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    padding: 35px 25px;
+    z-index: 20;
+}
+
+#welcome-overlay .card-title {
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    color: #9a3b26;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 0;
+}
+
+#welcome-overlay .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 18px 0 24px 0;
+}
+
+#welcome-overlay .divider .line {
+    height: 1px;
+    background-color: rgba(154, 59, 38, 0.3);
+    width: 50px;
+}
+
+#welcome-overlay .divider .square {
+    width: 6px;
+    height: 6px;
+    border: 1px solid rgba(154, 59, 38, 0.6);
+    margin: 0 10px;
+}
+
+#welcome-overlay .card-text {
+    color: #333333;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+#welcome-overlay .cta-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    background-color: #a4432a;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#welcome-overlay .cta-button:active {
+    transform: scale(0.98);
+}
+
+#welcome-overlay .cta-button:hover {
+    background-color: #8b3722;
+}
+
+#welcome-overlay .cta-button .btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
